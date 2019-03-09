@@ -7,7 +7,6 @@ import io.netty.channel.ChannelPipeline;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import org.springframework.util.CollectionUtils;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -49,7 +48,7 @@ public class NettyClient {
 					@Override
 					protected void initChannel(Channel channel) throws Exception {
 						ChannelPipeline pipeline = channel.pipeline();
-						if (!CollectionUtils.isEmpty(config.getChannelHandlers())) {
+						if (config.getChannelHandlers() != null) {
 							config.getChannelHandlers().stream().forEach(handler -> {
 								pipeline.addLast(handler);
 							});
